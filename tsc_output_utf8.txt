@@ -1,0 +1,1 @@
+﻿src/app/loans/page.tsx(6,8): error TS2613: Module '"C:/Users/lucas/Desktop/Projetos/SAF/src/components/BottomNavBar"' has no default export. Did you mean to use 'import { BottomNavBar } from "C:/Users/lucas/Desktop/Projetos/SAF/src/components/BottomNavBar"' instead?

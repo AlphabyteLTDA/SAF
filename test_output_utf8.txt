@@ -1,0 +1,830 @@
+﻿
+[1m[46m RUN [49m[22m [36mv4.0.18 [39m[90mC:/Users/lucas/Desktop/Projetos/SAF[39m
+
+ [32mÔ£ô[39m src/app/profile/page.test.tsx[2m > [22mProfile Page (/profile)[2m > [22mrenders a loading spinner while checking auth[32m 16[2mms[22m[39m
+ [32mÔ£ô[39m src/app/profile/page.test.tsx[2m > [22mProfile Page (/profile)[2m > [22mredirects to login if user is not authenticated after loading[32m 2[2mms[22m[39m
+ [32mÔ£ô[39m src/app/profile/page.test.tsx[2m > [22mProfile Page (/profile)[2m > [22mrenders user details and "Leitora" role, hiding admin area[32m 108[2mms[22m[39m
+ [31m├ù[39m src/app/profile/page.test.tsx[2m > [22mProfile Page (/profile)[2m > [22mrenders admin section area for "admin" role[32m 109[2mms[22m[39m
+[31m   ÔåÆ Unable to find an accessible element with the role "button" and name `/Cadastrar Novo Livro/i`
+
+Here are the accessible roles:
+
+  heading:
+
+  Name "Meu Perfil":
+  [36m<h1[31m
+    [33mclass[31m=[32m"text-2xl font-bold text-saf-900"[31m
+  [36m/>[31m
+
+  Name "Admin SAF":
+  [36m<h2[31m
+    [33mclass[31m=[32m"text-xl font-bold text-saf-900"[31m
+  [36m/>[31m
+
+  Name "Gest├úo do Acervo":
+  [36m<h3[31m
+    [33mclass[31m=[32m"font-bold text-saf-900 px-1"[31m
+  [36m/>[31m
+
+  --------------------------------------------------
+  paragraph:
+
+  Name "":
+  [36m<p[31m
+    [33mclass[31m=[32m"text-saf-500 text-sm"[31m
+  [36m/>[31m
+
+  Name "":
+  [36m<p[31m
+    [33mclass[31m=[32m"text-saf-500 text-sm"[31m
+  [36m/>[31m
+
+  --------------------------------------------------
+  link:
+
+  Name "Cadastrar Novo LivroAdicionar novos t├¡tulos ├á biblioteca":
+  [36m<a[31m
+    [33mclass[31m=[32m"bg-white rounded-2xl p-4 shadow-sm border border-saf-100 flex items-center gap-4 hover:border-saf-300 transition-colors group"[31m
+    [33mhref[31m=[32m"/admin/books/new"[31m
+  [36m/>[31m
+
+  --------------------------------------------------
+  button:
+
+  Name "Sair do Sistema":
+  [36m<button[31m
+    [33mclass[31m=[32m"mt-4 w-full bg-white border border-red-200 text-red-600 hover:bg-red-50 hover:border-red-300 font-bold py-3 px-4 rounded-xl min-h-[44px] transition-colors flex justify-center items-center gap-2 shadow-sm"[31m
+  [36m/>[31m
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+[36m<body>[31m
+  [36m<div>[31m
+    [36m<div[31m
+      [33mclass[31m=[32m"w-full max-w-md mx-auto p-4 flex flex-col gap-8 pb-28 pt-6"[31m
+    [36m>[31m
+      [36m<div[31m
+        [33mclass[31m=[32m"flex flex-col gap-1"[31m
+      [36m>[31m
+        [36m<h1[31m
+          [33mclass[31m=[32m"text-2xl font-bold text-saf-900"[31m
+        [36m>[31m
+          [0mMeu Perfil[0m
+        [36m</h1>[31m
+        [36m<p[31m
+          [33mclass[31m=[32m"text-saf-500 text-sm"[31m
+        [36m>[31m
+          [0mGerencie sua conta e visualize suas permiss├Áes.[0m
+        [36m</p>[31m
+      [36m</div>[31m
+      [36m<div[31m
+        [33mclass[31m=[32m"bg-white rounded-3xl p-6 shadow-sm border border-saf-100 flex flex-col gap-6"[31m
+      [36m>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"flex items-center gap-4"[31m
+        [36m>[31m
+          [36m<div[31m
+            [33mclass[31m=[32m"w-16 h-16 bg-saf-100 rounded-full flex items-center justify-center text-saf-400 flex-shrink-0"[31m
+          [36m>[31m
+            [36m<svg[31m
+              [33maria-hidden[31m=[32m"true"[31m
+              [33mclass[31m=[32m"lucide lucide-user w-8 h-8"[31m
+              [33mfill[31m=[32m"none"[31m
+              [33mheight[31m=[32m"24"[31m
+              [33mstroke[31m=[32m"currentColor"[31m
+              [33mstroke-linecap[31m=[32m"round"[31m
+              [33mstroke-linejoin[31m=[32m"round"[31m
+              [33mstroke-width[31m=[32m"2"[31m
+              [33mviewBox[31m=[32m"0 0 24 24"[31m
+              [33mwidth[31m=[32m"24"[31m
+              [33mxmlns[31m=[32m"http://www.w3.org/2000/svg"[31m
+            [36m>[31m
+              [36m<path[31m
+                [33md[31m=[32m"M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"[31m
+              [36m/>[31m
+              [36m<circle[31m
+                [33mcx[31m=[32m"12"[31m
+                [33mcy[31m=[32m"7"[31m
+                [33mr[31m=[32m"4"[31m
+              [36m/>[31m
+            [36m</svg>[31m
+          [36m</div>[31m
+          [36m<div[31m
+            [33mclass[31m=[32m"flex flex-col"[31m
+          [36m>[31m
+            [36m<h2[31m
+              [33mclass[31m=[32m"text-xl font-bold text-saf-900"[31m
+            [36m>[31m
+              [0mAdmin SAF[0m
+            [36m</h2>[31m
+            [36m<p[31m
+              [33mclass[31m=[32m"text-saf-500 text-sm"[31m
+            [36m>[31m
+              [0madmin@saf.com[0m
+            [36m</p>[31m
+          [36m</div>[31m
+        [36m</div>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"border-t border-saf-100 pt-4 flex items-center justify-between"[31m
+        [36m>[31m
+          [36m<span[31m
+            [33mclass[31m=[32m"text-sm font-medium text-saf-600"[31m
+          [36m>[31m
+            [0mN├¡vel de Acesso[0m
+          [36m</span>[31m
+          [36m<span[31m
+            [33mclass[31m=[32m"bg-saf-50 text-saf-700 border border-saf-200 text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1"[31m
+          [36m>[31m
+            [36m<svg[31m
+              [33maria-hidden[31m=[32m"true"[31m
+              [33mclass[31m=[32m"lucide lucide-shield-alert w-3 h-3"[31m
+              [33mfill[31m=[32m"none"[31m
+              [33mheight[31m=[32m"24"[31m
+              [33mstroke[31m=[32m"currentColor"[31m
+              [33mstroke-linecap[31m=[32m"round"[31m
+              [33mstroke-linejoin[31m=[32m"round"[31m
+              [33mstroke-width[31m=[32m"2"[31m
+              [33mviewBox[31m=[32m"0 0 24 24"[31m
+              [33mwidth[31m=[32m"24"[31m
+              [33mxmlns[31m=[32m"http://www.w3.org/2000/svg"[31m
+            [36m>[31m
+              [36m<path[31m
+                [33md[31m=[32m"M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"[31m
+              [36m/>[31m
+              [36m<path[31m
+                [33md[31m=[32m"M12 8v4"[31m
+              [36m/>[31m
+              [36m<path[31m
+                [33md[31m=[32m"M12 16h.01"[31m
+              [36m/>[31m
+            [36m</svg>[31m
+            [0mAdministradora[0m
+          [36m</span>[31m
+        [36m</div>[31m
+      [36m</div>[31m
+      [36m<div[31m
+        [33mclass[31m=[32m"flex flex-col gap-4"[31m
+      [36m>[31m
+        [36m<h3[31m
+          [33mclass[31m=[32m"font-bold text-saf-900 px-1"[31m
+        [36m>[31m
+          [0mGest├úo do Acervo[0m
+        [36m</h3>[31m
+        [36m<a[31m
+          [33mclass[31m=[32m"bg-white rounded-2xl p-4 shadow-sm border border-saf-100 flex items-center gap-4 hover:border-saf-300 transition-colors group"[31m
+          [33mhref[31m=[32m"/admin/books/new"[31m
+        [36m>[31m
+          [36m<div[31m
+            [33mclass[31m=[32m"w-12 h-12 bg-saf-50 rounded-full flex items-center justify-center text-saf-500 group-hover:bg-saf-100 transition-colors"[31m
+          [36m>[31m
+            [36m<svg[31m
+              [33maria-hidden[31m=[32m"true"[31m
+              [33mclass[31m=[32m"lucide lucide-circle-plus w-6 h-6"[31m
+              [33mfill[31m=[32m"none"[31m
+              [33mheight[31m=[32m"24"[31m
+              [33mstroke[31m=[32m"currentColor"[31m
+              [33mstroke-linecap[31m=[32m"round"[31m
+              [33mstroke-linejoin[31m=[32m"round"[31m
+              [33mstroke-width[31m=[32m"2"[31m
+              [33mviewBox[31m=[32m"0 0 24 24"[31m
+              [33mwidth[31m=[32m"24"[31m
+              [33mxmlns[31m=[32m"http://www.w3.org/2000/svg"[31m
+            [36m>[31m
+              [36m<circle[31m
+                [33mcx[31m=[32m"12"[31m
+                [33mcy[31m=[32m"12"[31m
+                [33mr[31m=[32m"10"[31m
+              [36m/>[31m
+              [36m<path[31m
+                [33md[31m=[32m"M8 12h8"[31m
+              [36m/>[31m
+              [36m<path[31m
+                [33md[31m=[32m"M12 8v8"[31m
+              [36m/>[31m
+            [36m</svg>[31m
+          [36m</div>[31m
+          [36m<div[31m
+            [33mclass[31m=[32m"flex flex-col"[31m
+          [36m>[31m
+            [36m<span[31m
+              [33mclass[31m=[32m"font-bold text-saf-900"[31m
+            [36m>[31m
+              [0mCadastrar Novo Livro[0m
+            [36m</span>[31m
+            [36m<span[31m
+              [33mclass[31m=[32m"text-xs text-saf-500"[31m
+            [36m>[31m
+              [0mAdicionar novos t├¡tulos ├á biblioteca[0m
+            [36m</span>[31m
+          [36m</div>[31m
+        [36m</a>[31m
+      [36m</div>[31m
+      [36m<button[31m
+        [33mclass[31m=[32m"mt-4 w-full bg-white border border-red-200 text-red-600 hover:bg-red-50 hover:border-red-300 font-bold py-3 px-4 rounded-xl min-h-[44px] transition-colors flex justify-center items-center gap-2 shadow-sm"[31m
+      [36m>[31m
+        [36m<svg[31m
+          [33maria-hidden[31m=[32m"true"[31m
+          [33mclass[31m=[32m"lucide lucide-log-out w-5 h-5"[31m
+          [33mfill[31m=[32m"none"[31m
+          [33mheight[31m=[32m"24"[31m
+          [33mstroke[31m=[32m"currentColor"[31m
+          [33mstroke-linecap[31m=[32m"round"[31m
+          [33mstroke-linejoin[31m=[32m"round"[31m
+          [33mstroke-width[31m=[32m"2"[31m
+          [33mviewBox[31m=[32m"0 0 24 24"[31m
+          [33mwidth[31m=[32m"24"[31m
+          [33mxmlns[31m=[32m"http://www.w3.org/2000/svg"[31m
+        [36m>[31m
+          [36m<path[31m
+            [33md[31m=[32m"m16 17 5-5-5-5"[31m
+          [36m/>[31m
+          [36m<path[31m
+            [33md[31m=[32m"M21 12H9"[31m
+          [36m/>[31m
+          [36m<path[31m
+            [33md[31m=[32m"M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"[31m
+          [36m/>[31m
+        [36m</svg>[31m
+        [0mSair do Sistema[0m
+      [36m</button>[31m
+    [36m</div>[31m
+  [36m</div>[31m
+[36m</body>[31m[39m
+ [32mÔ£ô[39m src/app/profile/page.test.tsx[2m > [22mProfile Page (/profile)[2m > [22mperforms logout flow correctly[32m 96[2mms[22m[39m
+node.exe : 
+No linha:1 caractere:1
++ & "C:\Program 
+Files\nodejs/node.exe" 
+"C:\Program 
+Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo        
+      : NotSpecified: (:  
+  String) [], RemoteExc   
+ eption
+    + FullyQualifiedError 
+   Id : NativeCommandErr  
+  or
+ 
+[31mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+[39m[1m[41m Failed 
+Tests 1 [49m[22m[31mÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[39m
+
+[41m[1m FAIL [22m[49m 
+src/app/profile/page.test.
+tsx[2m > [22mProfile 
+Page (/profile)[2m > 
+[22mrenders admin 
+section area for "admin" 
+role
+[31m[1mTestingLibraryEle
+mentError[22m[39m: 
+Unable to find an 
+accessible element with 
+the role "button" and 
+name `/Cadastrar Novo 
+Livro/i`
+
+Here are the accessible 
+roles:
+
+  heading:
+
+  Name "Meu Perfil":
+  [36m<h1[39m
+    [33mclass[39m=[32m"
+text-2xl font-bold 
+text-saf-900"[39m
+  [36m/>[39m
+
+  Name "Admin SAF":
+  [36m<h2[39m
+    [33mclass[39m=[32m"
+text-xl font-bold 
+text-saf-900"[39m
+  [36m/>[39m
+
+  Name "Gest├úo do 
+Acervo":
+  [36m<h3[39m
+    [33mclass[39m=[32m"
+font-bold text-saf-900 
+px-1"[39m
+  [36m/>[39m
+
+  ------------------------
+--------------------------
+  paragraph:
+
+  Name "":
+  [36m<p[39m
+    [33mclass[39m=[32m"
+text-saf-500 text-sm"[39m
+  [36m/>[39m
+
+  Name "":
+  [36m<p[39m
+    [33mclass[39m=[32m"
+text-saf-500 text-sm"[39m
+  [36m/>[39m
+
+  ------------------------
+--------------------------
+  link:
+
+  Name "Cadastrar Novo 
+LivroAdicionar novos 
+t├¡tulos ├á biblioteca":
+  [36m<a[39m
+    [33mclass[39m=[32m"
+bg-white rounded-2xl p-4 
+shadow-sm border 
+border-saf-100 flex 
+items-center gap-4 
+hover:border-saf-300 
+transition-colors 
+group"[39m
+    [33mhref[39m=[32m"/
+admin/books/new"[39m
+  [36m/>[39m
+
+  ------------------------
+--------------------------
+  button:
+
+  Name "Sair do Sistema":
+  [36m<button[39m
+    [33mclass[39m=[32m"
+mt-4 w-full bg-white 
+border border-red-200 
+text-red-600 
+hover:bg-red-50 
+hover:border-red-300 
+font-bold py-3 px-4 
+rounded-xl min-h-[44px] 
+transition-colors flex 
+justify-center 
+items-center gap-2 
+shadow-sm"[39m
+  [36m/>[39m
+
+  ------------------------
+--------------------------
+
+Ignored nodes: comments, 
+script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32
+m"w-full max-w-md mx-auto 
+p-4 flex flex-col gap-8 
+pb-28 pt-6"[39m
+    [36m>[39m
+      [36m<div[39m
+        [33mclass[39m=[
+32m"flex flex-col 
+gap-1"[39m
+      [36m>[39m
+        [36m<h1[39m
+          [33mclass[39m=
+[32m"text-2xl font-bold 
+text-saf-900"[39m
+        [36m>[39m
+          [0mMeu 
+Perfil[0m
+        [36m</h1>[39m
+        [36m<p[39m
+          [33mclass[39m=
+[32m"text-saf-500 
+text-sm"[39m
+        [36m>[39m
+          [0mGerencie 
+sua conta e visualize 
+suas permiss├Áes.[0m
+        [36m</p>[39m
+      [36m</div>[39m
+      [36m<div[39m
+        [33mclass[39m=[
+32m"bg-white rounded-3xl 
+p-6 shadow-sm border 
+border-saf-100 flex 
+flex-col gap-6"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=
+[32m"flex items-center 
+gap-4"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39
+m=[32m"w-16 h-16 
+bg-saf-100 rounded-full 
+flex items-center 
+justify-center 
+text-saf-400 
+flex-shrink-0"[39m
+          [36m>[39m
+            [36m<svg[39m
+              [33maria-hi
+dden[39m=[32m"true"[39m
+              [33mclass[
+39m=[32m"lucide 
+lucide-user w-8 h-8"[39m
+              [33mfill[3
+9m=[32m"none"[39m
+              [33mheight
+[39m=[32m"24"[39m
+              [33mstroke
+[39m=[32m"currentColor"[
+39m
+              [33mstroke-
+linecap[39m=[32m"round"
+[39m
+              [33mstroke-
+linejoin[39m=[32m"round"
+[39m
+              [33mstroke-
+width[39m=[32m"2"[39m
+              
+[33mviewBox[39m=[32m"0 
+0 24 24"[39m
+              [33mwidth[
+39m=[32m"24"[39m
+              [33mxmlns[
+39m=[32m"http://www.w3.or
+g/2000/svg"[39m
+            [36m>[39m
+              
+[36m<path[39m
+                
+[33md[39m=[32m"M19 
+21v-2a4 4 0 0 0-4-4H9a4 4 
+0 0 0-4 4v2"[39m
+              [36m/>[39m
+              
+[36m<circle[39m
+                [33mcx[3
+9m=[32m"12"[39m
+                
+[33mcy[39m=[32m"7"[39m
+                
+[33mr[39m=[32m"4"[39m
+              [36m/>[39m
+            
+[36m</svg>[39m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mclass[39
+m=[32m"flex 
+flex-col"[39m
+          [36m>[39m
+            [36m<h2[39m
+              [33mclass[
+39m=[32m"text-xl 
+font-bold 
+text-saf-900"[39m
+            [36m>[39m
+              [0mAdmin 
+SAF[0m
+            
+[36m</h2>[39m
+            [36m<p[39m
+              [33mclass[
+39m=[32m"text-saf-500 
+text-sm"[39m
+            [36m>[39m
+              
+[0madmin@saf.com[0m
+            [36m</p>[39m
+          [36m</div>[39m
+        [36m</div>[39m
+        [36m<div[39m
+          [33mclass[39m=
+[32m"border-t 
+border-saf-100 pt-4 flex 
+items-center 
+justify-between"[39m
+        [36m>[39m
+          [36m<span[39m
+            [33mclass[39
+m=[32m"text-sm 
+font-medium 
+text-saf-600"[39m
+          [36m>[39m
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[31m1 failed[39m[22m[2m | [22m[1m[32m4 passed[39m[22m[90m (5)[39m
+[2m   Start at [22m 15:12:20
+[2m   Duration [22m 1.28s[2m (transform 90ms, setup 162ms, import 148ms, tests 333ms, environment 500ms)[22m
+
+            [0mN├¡vel de 
+Acesso[0m
+          
+[36m</span>[39m
+          [36m<span[39m
+            [33mclass[39
+m=[32m"bg-saf-50 
+text-saf-700 border 
+border-saf-200 text-xs 
+font-bold px-3 py-1 
+rounded-full flex 
+items-center gap-1"[39m
+          [36m>[39m
+            [36m<svg[39m
+              [33maria-hi
+dden[39m=[32m"true"[39m
+              [33mclass[
+39m=[32m"lucide 
+lucide-shield-alert w-3 
+h-3"[39m
+              [33mfill[3
+9m=[32m"none"[39m
+              [33mheight
+[39m=[32m"24"[39m
+              [33mstroke
+[39m=[32m"currentColor"[
+39m
+              [33mstroke-
+linecap[39m=[32m"round"
+[39m
+              [33mstroke-
+linejoin[39m=[32m"round"
+[39m
+              [33mstroke-
+width[39m=[32m"2"[39m
+              
+[33mviewBox[39m=[32m"0 
+0 24 24"[39m
+              [33mwidth[
+39m=[32m"24"[39m
+              [33mxmlns[
+39m=[32m"http://www.w3.or
+g/2000/svg"[39m
+            [36m>[39m
+              
+[36m<path[39m
+                
+[33md[39m=[32m"M20 
+13c0 5-3.5 7.5-7.66 
+8.95a1 1 0 0 
+1-.67-.01C7.5 20.5 4 18 4 
+13V6a1 1 0 0 1 1-1c2 0 
+4.5-1.2 6.24-2.72a1.17 
+1.17 0 0 1 1.52 0C14.51 
+3.81 17 5 19 5a1 1 0 0 1 
+1 1z"[39m
+              [36m/>[39m
+              
+[36m<path[39m
+                
+[33md[39m=[32m"M12 
+8v4"[39m
+              [36m/>[39m
+              
+[36m<path[39m
+                
+[33md[39m=[32m"M12 
+16h.01"[39m
+              [36m/>[39m
+            
+[36m</svg>[39m
+            
+[0mAdministradora[0m
+          
+[36m</span>[39m
+        [36m</div>[39m
+      [36m</div>[39m
+      [36m<div[39m
+        [33mclass[39m=[
+32m"flex flex-col 
+gap-4"[39m
+      [36m>[39m
+        [36m<h3[39m
+          [33mclass[39m=
+[32m"font-bold 
+text-saf-900 px-1"[39m
+        [36m>[39m
+          [0mGest├úo do 
+Acervo[0m
+        [36m</h3>[39m
+        [36m<a[39m
+          [33mclass[39m=
+[32m"bg-white 
+rounded-2xl p-4 shadow-sm 
+border border-saf-100 
+flex items-center gap-4 
+hover:border-saf-300 
+transition-colors 
+group"[39m
+          [33mhref[39m=
+[32m"/admin/books/new"[39
+m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39
+m=[32m"w-12 h-12 
+bg-saf-50 rounded-full 
+flex items-center 
+justify-center 
+text-saf-500 
+group-hover:bg-saf-100 
+transition-colors"[39m
+          [36m>[39m
+            [36m<svg[39m
+              [33maria-hi
+dden[39m=[32m"true"[39m
+              [33mclass[
+39m=[32m"lucide 
+lucide-circle-plus w-6 
+h-6"[39m
+              [33mfill[3
+9m=[32m"none"[39m
+              [33mheight
+[39m=[32m"24"[39m
+              [33mstroke
+[39m=[32m"currentColor"[
+39m
+              [33mstroke-
+linecap[39m=[32m"round"
+[39m
+              [33mstroke-
+linejoin[39m=[32m"round"
+[39m
+              [33mstroke-
+width[39m=[32m"2"[39m
+              
+[33mviewBox[39m=[32m"0 
+0 24 24"[39m
+              [33mwidth[
+39m=[32m"24"[39m
+              [33mxmlns[
+39m=[32m"http://www.w3.or
+g/2000/svg"[39m
+            [36m>[39m
+              
+[36m<circle[39m
+                [33mcx[3
+9m=[32m"12"[39m
+                [33mcy[3
+9m=[32m"12"[39m
+                
+[33mr[39m=[32m"10"[39m
+              [36m/>[39m
+              
+[36m<path[39m
+                
+[33md[39m=[32m"M8 
+12h8"[39m
+              [36m/>[39m
+              
+[36m<path[39m
+                
+[33md[39m=[32m"M12 
+8v8"[39m
+              [36m/>[39m
+            
+[36m</svg>[39m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mclass[39
+m=[32m"flex 
+flex-col"[39m
+          [36m>[39m
+            
+[36m<span[39m
+              [33mclass[
+39m=[32m"font-bold 
+text-saf-900"[39m
+            [36m>[39m
+              
+[0mCadastrar Novo 
+Livro[0m
+            
+[36m</span>[39m
+            
+[36m<span[39m
+              [33mclass[
+39m=[32m"text-xs 
+text-saf-500"[39m
+            [36m>[39m
+              
+[0mAdicionar novos 
+t├¡tulos ├á biblioteca[0m
+            
+[36m</span>[39m
+          [36m</div>[39m
+        [36m</a>[39m
+      [36m</div>[39m
+      [36m<button[39m
+        [33mclass[39m=[
+32m"mt-4 w-full bg-white 
+border border-red-200 
+text-red-600 
+hover:bg-red-50 
+hover:border-red-300 
+font-bold py-3 px-4 
+rounded-xl min-h-[44px] 
+transition-colors flex 
+justify-center 
+items-center gap-2 
+shadow-sm"[39m
+      [36m>[39m
+        [36m<svg[39m
+          [33maria-hidden
+[39m=[32m"true"[39m
+          [33mclass[39m=
+[32m"lucide 
+lucide-log-out w-5 
+h-5"[39m
+          [33mfill[39m=
+[32m"none"[39m
+          [33mheight[39m
+=[32m"24"[39m
+          [33mstroke[39m
+=[32m"currentColor"[39m
+          [33mstroke-line
+cap[39m=[32m"round"[39m
+          [33mstroke-line
+join[39m=[32m"round"[39
+m
+          [33mstroke-widt
+h[39m=[32m"2"[39m
+          
+[33mviewBox[39m=[32m"0 
+0 24 24"[39m
+          [33mwidth[39m=
+[32m"24"[39m
+          [33mxmlns[39m=
+[32m"http://www.w3.org/20
+00/svg"[39m
+        [36m>[39m
+          [36m<path[39m
+            
+[33md[39m=[32m"m16 17 
+5-5-5-5"[39m
+          [36m/>[39m
+          [36m<path[39m
+            
+[33md[39m=[32m"M21 
+12H9"[39m
+          [36m/>[39m
+          [36m<path[39m
+            
+[33md[39m=[32m"M9 
+21H5a2 2 0 0 1-2-2V5a2 2 
+0 0 1 2-2h4"[39m
+          [36m/>[39m
+        [36m</svg>[39m
+        [0mSair do 
+Sistema[0m
+      [36m</button>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+[90m [2mÔØ»[22m 
+Object.getElementError nod
+e_modules/@testing-library
+/dom/dist/config.js:[2m37
+:19[22m[39m
+[90m [2mÔØ»[22m node_mo
+dules/@testing-library/dom
+/dist/query-helpers.js:[2
+m76:38[22m[39m
+[90m [2mÔØ»[22m node_mo
+dules/@testing-library/dom
+/dist/query-helpers.js:[2
+m52:17[22m[39m
+[90m [2mÔØ»[22m node_mo
+dules/@testing-library/dom
+/dist/query-helpers.js:[2
+m95:19[22m[39m
+[36m [2mÔØ»[22m src/app
+/profile/page.test.tsx:[2
+m88:23[22m[39m
+    [90m 86| [39m       
+ [90m// Gest├úo de 
+acervo should be 
+there[39m
+    [90m 87| [39m       
+ expect(screen.getByText('
+Gest├úo do Acervo')).toBeI
+nTheDocumentÔÇª
+    [90m 88| [39m       
+ expect(screen.getByRole('
+button', { name: 
+/Cadastrar Novo LivrÔÇª
+    [90m   | [39m       
+               [31m^[39m
+    [90m 89| [39m    })
+    [90m 90| [39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ
+»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»Ô
+Ä»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»[1/1]ÔÄ»[22m[39m
+

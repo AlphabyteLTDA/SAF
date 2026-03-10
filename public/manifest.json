@@ -1,0 +1,9 @@
+{
+    "name": "SAF Biblioteca Base",
+    "short_name": "SAF Lib",
+    "description": "Sistema de gestão de biblioteca online para a SAF",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#fdf4ff",
+    "theme_color": "#d946ef"
+}
