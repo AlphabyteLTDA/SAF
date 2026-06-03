@@ -37,7 +37,6 @@ export function useAuth() {
                     supabase.from('profiles').upsert({
                         id: u.id,
                         full_name: u.user_metadata?.full_name ?? u.user_metadata?.name ?? u.email?.split('@')[0] ?? 'Usuário',
-                        email: u.email ?? '',
                         role: 'leitora',
                     }, { onConflict: 'id', ignoreDuplicates: true })
                 }

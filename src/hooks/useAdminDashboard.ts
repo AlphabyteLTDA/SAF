@@ -13,7 +13,6 @@ export type AdminLoanWithDetails = {
     profiles: {
         id: string
         full_name: string
-        email: string
     }
 }
 
@@ -24,7 +23,7 @@ export function useAdminDashboard() {
         queryFn: async (): Promise<AdminLoanWithDetails[]> => {
             const [loansResult, profilesResult] = await Promise.all([
                 supabase.from('loans').select('*, books(*)').eq('status', 'pendente').order('created_at', { ascending: true }),
-                supabase.from('profiles').select('id, full_name, email')
+                supabase.from('profiles').select('id, full_name')
             ])
 
             if (loansResult.error) throw loansResult.error
@@ -33,7 +32,7 @@ export function useAdminDashboard() {
             const profiles = profilesResult.data ?? []
             return loansResult.data.map(loan => ({
                 ...loan,
-                profiles: profiles.find(p => p.id === loan.user_id) ?? { id: loan.user_id, full_name: 'Leitor(a)', email: '' }
+                profiles: profiles.find(p => p.id === loan.user_id) ?? { id: loan.user_id, full_name: 'Leitor(a)' }
             })) as AdminLoanWithDetails[]
         }
     })
@@ -44,7 +43,7 @@ export function useAdminDashboard() {
         queryFn: async (): Promise<AdminLoanWithDetails[]> => {
             const [loansResult, profilesResult] = await Promise.all([
                 supabase.from('loans').select('*, books(*)').eq('status', 'ativo').order('due_date', { ascending: true }),
-                supabase.from('profiles').select('id, full_name, email')
+                supabase.from('profiles').select('id, full_name')
             ])
 
             if (loansResult.error) throw loansResult.error
@@ -53,7 +52,7 @@ export function useAdminDashboard() {
             const profiles = profilesResult.data ?? []
             return loansResult.data.map(loan => ({
                 ...loan,
-                profiles: profiles.find(p => p.id === loan.user_id) ?? { id: loan.user_id, full_name: 'Leitor(a)', email: '' }
+                profiles: profiles.find(p => p.id === loan.user_id) ?? { id: loan.user_id, full_name: 'Leitor(a)' }
             })) as AdminLoanWithDetails[]
         }
     })

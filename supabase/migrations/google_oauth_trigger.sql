@@ -6,7 +6,7 @@
 CREATE OR REPLACE FUNCTION public.handle_new_user()
 RETURNS trigger AS $$
 BEGIN
-  INSERT INTO public.profiles (id, full_name, email, role)
+  INSERT INTO public.profiles (id, full_name, role)
   VALUES (
     NEW.id,
     COALESCE(
@@ -14,7 +14,6 @@ BEGIN
       NEW.raw_user_meta_data->>'name',
       split_part(NEW.email, '@', 1)
     ),
-    NEW.email,
     'leitora'
   )
   ON CONFLICT (id) DO NOTHING;
@@ -28,7 +27,7 @@ CREATE TRIGGER on_auth_user_created
   FOR EACH ROW EXECUTE FUNCTION public.handle_new_user();
 
 -- 2. Backfill: cria perfis para usuários existentes que ainda não têm perfil
-INSERT INTO public.profiles (id, full_name, email, role)
+INSERT INTO public.profiles (id, full_name, role)
 SELECT
   au.id,
   COALESCE(
@@ -36,7 +35,6 @@ SELECT
     au.raw_user_meta_data->>'name',
     split_part(au.email, '@', 1)
   ),
-  au.email,
   'leitora'
 FROM auth.users au
 LEFT JOIN public.profiles p ON p.id = au.id
