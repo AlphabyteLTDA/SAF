@@ -25,10 +25,20 @@ export function useAuth() {
         initAuth()
 
         const { data: { subscription } } = supabase.auth.onAuthStateChange(
-            async (_event, session) => {
+            async (event, session) => {
                 if (mounted) {
                     setUser(session?.user || null)
                     setIsSessionLoading(false)
+                }
+
+                if (event === 'SIGNED_IN' && session?.user) {
+                    const u = session.user
+                    await supabase.from('profiles').upsert({
+                        id: u.id,
+                        full_name: u.user_metadata?.full_name ?? u.user_metadata?.name ?? u.email?.split('@')[0] ?? 'Usuário',
+                        email: u.email ?? '',
+                        role: 'leitora',
+                    }, { onConflict: 'id', ignoreDuplicates: true })
                 }
             }
         )
