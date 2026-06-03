@@ -44,7 +44,7 @@ describe('useBooks Hook (Real Data)', () => {
         expect(supabase.from).toHaveBeenCalledWith('books')
         expect(mockSelect).toHaveBeenCalledWith('*')
         expect(mockOrder).toHaveBeenCalledWith('created_at', { ascending: false })
-        expect(result.current.data).toEqual([{ id: '1', title: 'Livro Teste', author: 'Autor Teste' }])
+        expect(result.current.data).toEqual([{ id: '1', title: 'Livro Teste', author: 'Autor Teste', category: [] }])
     })
 
     it('handles supabase fetch errors', async () => {

@@ -53,10 +53,10 @@ describe('Profile Page (/profile)', () => {
         expect(mockPush).toHaveBeenCalledWith('/login')
     })
 
-    it('renders user details and "Leitora" role, hiding admin area', () => {
+    it('renders user details and "Leitor(a)" role, hiding admin area', () => {
         vi.mocked(useAuth).mockReturnValue({
             isLoading: false,
-            user: { email: 'leitora@saf.com', user_metadata: { name: 'Maria Joaquina' } },
+            user: { email: 'leitora@saf.com', user_metadata: { full_name: 'Maria Joaquina' } },
             role: 'leitora',
         } as any)
 
@@ -64,7 +64,7 @@ describe('Profile Page (/profile)', () => {
 
         expect(screen.getByText('Maria Joaquina')).toBeInTheDocument()
         expect(screen.getByText('leitora@saf.com')).toBeInTheDocument()
-        expect(screen.getByText('Leitora')).toBeInTheDocument()
+        expect(screen.getByText('Leitor(a)')).toBeInTheDocument()
 
         // Gestão de acervo shouldn't be there
         expect(screen.queryByText('Administração')).not.toBeInTheDocument()
@@ -75,14 +75,14 @@ describe('Profile Page (/profile)', () => {
     it('renders admin section area for "admin" role', () => {
         vi.mocked(useAuth).mockReturnValue({
             isLoading: false,
-            user: { email: 'admin@saf.com', user_metadata: { name: 'Admin SAF' } },
+            user: { email: 'admin@saf.com', user_metadata: { full_name: 'Admin SAF' } },
             role: 'admin',
         } as any)
 
         render(<ProfilePage />)
 
         expect(screen.getByText('Admin SAF')).toBeInTheDocument()
-        expect(screen.getByText('Administradora')).toBeInTheDocument()
+        expect(screen.getByText('Administrador(a)')).toBeInTheDocument()
 
         // Gestão de acervo should be there
         expect(screen.getByText('Administração')).toBeInTheDocument()
@@ -93,7 +93,7 @@ describe('Profile Page (/profile)', () => {
     it('performs logout flow correctly', async () => {
         vi.mocked(useAuth).mockReturnValue({
             isLoading: false,
-            user: { email: 'leitora@saf.com', user_metadata: { name: 'Maria Joaquina' } },
+            user: { email: 'leitora@saf.com', user_metadata: { full_name: 'Maria Joaquina' } },
             role: 'leitora',
         } as any)
 

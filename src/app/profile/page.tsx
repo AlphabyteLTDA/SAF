@@ -33,7 +33,7 @@ export default function ProfilePage() {
         )
     }
 
-    const name = user.user_metadata?.name || 'Usuária SAF'
+    const name = user.user_metadata?.full_name || 'Usuário(a) SAF'
     const email = user.email || ''
 
     return (
@@ -59,11 +59,11 @@ export default function ProfilePage() {
                     {role === 'admin' ? (
                         <span className="bg-saf-50 text-saf-700 border border-saf-200 text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1">
                             <ShieldAlert className="w-3 h-3" />
-                            Administradora
+                            Administrador(a)
                         </span>
                     ) : (
                         <span className="bg-gray-100 text-gray-600 text-xs font-bold px-3 py-1 rounded-full border border-gray-200">
-                            Leitora
+                            Leitor(a)
                         </span>
                     )}
                 </div>

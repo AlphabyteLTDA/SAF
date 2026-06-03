@@ -6,8 +6,9 @@ import Link from 'next/link'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-import { BookOpen } from 'lucide-react'
+import { BookOpen, Eye, EyeOff } from 'lucide-react'
 import toast from 'react-hot-toast'
+import Image from 'next/image'
 import { supabase } from '@/lib/supabase'
 
 const registerSchema = z.object({
@@ -24,6 +25,9 @@ type RegisterFormData = z.infer<typeof registerSchema>
 
 export default function RegisterPage() {
     const [isLoading, setIsLoading] = useState(false)
+    const [isSubmitted, setIsSubmitted] = useState(false)
+    const [showPassword, setShowPassword] = useState(false)
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false)
     const router = useRouter()
 
     const {
@@ -43,7 +47,8 @@ export default function RegisterPage() {
             options: {
                 data: {
                     full_name: data.fullName
-                }
+                },
+                emailRedirectTo: `${window.location.origin}/login`
             }
         })
 
@@ -52,16 +57,54 @@ export default function RegisterPage() {
         if (error) {
             toast.error(error.message)
         } else {
-            toast.success('Conta criada com sucesso! Redirecionando...')
-            router.push('/')
+            toast.success('Boas-vindas! Verifique sua caixa de entrada.', { duration: 5000 })
+            setIsSubmitted(true)
         }
     }
 
+    if (isSubmitted) {
+        return (
+            <div className="min-h-[calc(100vh-100px)] md:min-h-[calc(100vh-64px)] bg-saf-50 flex flex-col justify-center items-center p-4">
+                <div className="w-full max-w-sm bg-white rounded-3xl p-8 shadow-sm border border-saf-100 flex flex-col items-center text-center animate-in fade-in zoom-in-95 duration-500">
+                    <div className="w-20 h-20 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center mb-6 shadow-sm border-2 border-emerald-100">
+                        <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                    </div>
+                    <h1 className="text-2xl font-bold text-saf-900 mb-3">Verifique seu E-mail</h1>
+                    <p className="text-saf-600 mb-2 leading-relaxed">
+                        Falta muito pouco! Enviamos uma mensagem para <strong>{register('email').name === 'email' /* workaround merely for visuals, we don't have the explicit value preserved outside react-hook-form unless watched, but let's keep it generic */ ? 'você' : 'você'}</strong> com um botão seguro de confirmação.
+                    </p>
+                    <p className="text-saf-600 mb-6 leading-relaxed">
+                        Por segurança, <strong>precisamos que você clique no botão que está no e-mail</strong> para ativar sua conta no Acervo.
+                    </p>
+                    <p className="text-xs text-saf-400 mt-2 mb-8 bg-saf-50 p-3 rounded-lg border border-saf-100">
+                        Não recebeu? Verifique se o e-mail não caiu de paraquedas na pasta de Spam ou Lixo Eletrônico.
+                    </p>
+                    <Link
+                        href="/login"
+                        className="w-full bg-saf-600 hover:bg-saf-700 active:bg-saf-800 text-white font-bold py-3.5 px-4 rounded-xl transition-colors min-h-[48px] flex justify-center items-center shadow-sm"
+                    >
+                        Ir para a tela de Login
+                    </Link>
+                </div>
+                <div className="mt-4 mb-2 w-72 md:w-80 relative h-24 md:h-32 opacity-90 transition-opacity hover:opacity-100 flex items-center justify-center shrink-0">
+                    <Image 
+                        src="/presbeteriana_logo.png" 
+                        alt="Igreja Presbiteriana do Brasil" 
+                        fill 
+                        className="object-contain" 
+                    />
+                </div>
+            </div>
+        )
+    }
+
     return (
-        <div className="min-h-screen bg-saf-50 flex flex-col justify-center items-center p-4">
+        <div className="min-h-[calc(100vh-100px)] md:min-h-[calc(100vh-64px)] bg-saf-50 flex flex-col justify-center items-center p-4">
             <div className="w-full max-w-sm bg-white rounded-3xl p-8 shadow-sm border border-saf-100 flex flex-col items-center">
-                <div className="w-16 h-16 bg-saf-100 text-saf-500 rounded-full flex items-center justify-center mb-4">
-                    <BookOpen className="w-8 h-8" />
+                <div className="relative w-24 h-24 mb-4 rounded-full overflow-hidden border-[3px] border-saf-100 shadow-sm flex items-center justify-center bg-white">
+                    <Image src="/saflogobranco.png" alt="SAF Logo" fill className="object-cover" />
                 </div>
                 <h1 className="text-2xl font-bold text-saf-900 mb-2 text-center">Criar Conta</h1>
                 <p className="text-saf-500 text-center text-sm mb-6 pb-2 border-b border-saf-50 w-full text-balance">
@@ -91,25 +134,41 @@ export default function RegisterPage() {
                         {errors.email && <p className="text-red-500 text-xs mt-1 ml-1 font-medium">{errors.email.message}</p>}
                     </div>
 
-                    <div>
+                    <div className="relative">
                         <input
-                            type="password"
+                            type={showPassword ? "text" : "password"}
                             placeholder="Senha"
-                            className={`w-full px-4 py-3 border-2 rounded-xl focus:border-saf-500 focus:ring-4 focus:ring-saf-500/20 outline-none transition-all placeholder-saf-300 min-h-[44px] text-saf-900 ${errors.password ? 'border-red-300 focus:border-red-500 focus:ring-red-500/20' : 'border-saf-100'
+                            className={`w-full px-4 py-3 border-2 rounded-xl focus:border-saf-500 focus:ring-4 focus:ring-saf-500/20 outline-none transition-all placeholder-saf-300 min-h-[44px] text-saf-900 pr-12 ${errors.password ? 'border-red-300 focus:border-red-500 focus:ring-red-500/20' : 'border-saf-100'
                                 }`}
                             {...register('password')}
                         />
+                        <button
+                            type="button"
+                            onClick={() => setShowPassword(!showPassword)}
+                            className="absolute right-3 top-[-1px] bottom-0 p-2 text-saf-400 hover:text-saf-600 focus:outline-none transition-colors h-fit my-auto"
+                            aria-label={showPassword ? "Ocultar senha" : "Mostrar senha"}
+                        >
+                            {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                        </button>
                         {errors.password && <p className="text-red-500 text-xs mt-1 ml-1 font-medium">{errors.password.message}</p>}
                     </div>
 
-                    <div>
+                    <div className="relative">
                         <input
-                            type="password"
+                            type={showConfirmPassword ? "text" : "password"}
                             placeholder="Confirmar Senha"
-                            className={`w-full px-4 py-3 border-2 rounded-xl focus:border-saf-500 focus:ring-4 focus:ring-saf-500/20 outline-none transition-all placeholder-saf-300 min-h-[44px] text-saf-900 ${errors.confirmPassword ? 'border-red-300 focus:border-red-500 focus:ring-red-500/20' : 'border-saf-100'
+                            className={`w-full px-4 py-3 border-2 rounded-xl focus:border-saf-500 focus:ring-4 focus:ring-saf-500/20 outline-none transition-all placeholder-saf-300 min-h-[44px] text-saf-900 pr-12 ${errors.confirmPassword ? 'border-red-300 focus:border-red-500 focus:ring-red-500/20' : 'border-saf-100'
                                 }`}
                             {...register('confirmPassword')}
                         />
+                        <button
+                            type="button"
+                            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                            className="absolute right-3 top-[-1px] bottom-0 p-2 text-saf-400 hover:text-saf-600 focus:outline-none transition-colors h-fit my-auto"
+                            aria-label={showConfirmPassword ? "Ocultar senha" : "Mostrar senha"}
+                        >
+                            {showConfirmPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                        </button>
                         {errors.confirmPassword && (
                             <p className="text-red-500 text-xs mt-1 ml-1 font-medium">{errors.confirmPassword.message}</p>
                         )}
@@ -136,6 +195,14 @@ export default function RegisterPage() {
                         </Link>
                     </div>
                 </form>
+            </div>
+            <div className="mt-4 mb-2 w-72 md:w-80 relative h-24 md:h-32 opacity-90 transition-opacity hover:opacity-100 flex items-center justify-center shrink-0">
+                <Image 
+                    src="/presbeteriana_logo.png" 
+                    alt="Igreja Presbiteriana do Brasil" 
+                    fill 
+                    className="object-contain" 
+                />
             </div>
         </div>
     )

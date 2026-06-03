@@ -7,13 +7,29 @@ import { useRouter } from 'next/navigation'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 vi.mock('@/hooks/useAuth')
+vi.mock('browser-image-compression', () => ({
+    default: vi.fn().mockImplementation((file) => Promise.resolve(file))
+}))
 vi.mock('@/lib/supabase', () => ({
     supabase: {
         from: vi.fn(),
+        storage: {
+            from: vi.fn()
+        }
     }
 }))
 vi.mock('next/navigation', () => ({
     useRouter: vi.fn(),
+}))
+vi.mock('@/hooks/useCategories', () => ({
+    useCategories: vi.fn().mockReturnValue({
+        data: [
+            { id: '1', name: 'Teologia Cristã', created_at: '' },
+            { id: '2', name: 'Vida Cristã', created_at: '' },
+            { id: '3', name: 'Biografia', created_at: '' },
+        ],
+        isLoading: false,
+    })
 }))
 
 const createWrapper = () => {
@@ -33,6 +49,7 @@ describe('NewBookPage (Admin CRUD)', () => {
     beforeEach(() => {
         vi.clearAllMocks()
         vi.mocked(useRouter).mockReturnValue({ push: mockPush } as any)
+        global.URL.createObjectURL = vi.fn()
     })
 
     it('redirects non-admin users to home', () => {
@@ -52,12 +69,14 @@ describe('NewBookPage (Admin CRUD)', () => {
 
         const titleInput = screen.getByLabelText(/título/i)
         const authorInput = screen.getByLabelText(/autor/i)
-        const catSelect = screen.getByLabelText(/categoria/i)
+        
+        // Categoria now uses a button instead of a select
+        const catButton = screen.getByRole('button', { name: 'Teologia Cristã' })
         const submitBtn = screen.getByRole('button', { name: /salvar livro/i })
 
         expect(titleInput).toBeInTheDocument()
         expect(authorInput).toBeInTheDocument()
-        expect(catSelect).toBeInTheDocument()
+        expect(catButton).toBeInTheDocument()
         expect(submitBtn).toBeInTheDocument()
 
         expect(titleInput).toHaveClass('min-h-[44px]')
@@ -89,7 +108,9 @@ describe('NewBookPage (Admin CRUD)', () => {
 
         fireEvent.change(screen.getByLabelText(/título/i), { target: { value: 'Novo Teste' } })
         fireEvent.change(screen.getByLabelText(/autor/i), { target: { value: 'Autor Novo' } })
-        fireEvent.change(screen.getByLabelText(/categoria/i), { target: { value: 'Ficção' } })
+        
+        // Click the button instead of changing input
+        fireEvent.click(screen.getByRole('button', { name: 'Vida Cristã' }))
 
         fireEvent.click(screen.getByRole('button', { name: /salvar livro/i }))
 
@@ -98,8 +119,10 @@ describe('NewBookPage (Admin CRUD)', () => {
             expect(mockInsert).toHaveBeenCalledWith({
                 title: 'Novo Teste',
                 author: 'Autor Novo',
-                category: 'Ficção',
-                status: 'disponivel'
+                category: ['Vida Cristã'],
+                description: null,
+                status: 'disponivel',
+                cover_url: null
             })
             expect(mockPush).toHaveBeenCalledWith('/')
         })

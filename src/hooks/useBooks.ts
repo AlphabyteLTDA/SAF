@@ -1,12 +1,14 @@
 import { useQuery } from '@tanstack/react-query'
 import { supabase } from '@/lib/supabase'
+import { parseCategories } from '@/lib/bookUtils'
 
 export type Book = {
     id: string
     title: string
     author: string
-    category: string
+    category: string[]
     status: 'disponivel' | 'emprestado' | 'reservado' | string
+    description?: string | null
     cover_url: string | null
     created_at: string
 }
@@ -24,7 +26,11 @@ export function useBooks() {
                 throw new Error(error.message)
             }
 
-            return data as Book[]
+            // Garante que cada livro tenha as categorias parseadas corretamente
+            return (data || []).map(book => ({
+                ...book,
+                category: parseCategories(book.category)
+            })) as Book[]
         }
     })
 }

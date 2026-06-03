@@ -27,6 +27,11 @@ yarn-error.log*
 
 # local env files
 .env*.local
+.env.production
+
+# test outputs
+out.json
+vitest-out.txt
 
 # vercel
 .vercel
@@ -34,3 +39,5 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+.vercel

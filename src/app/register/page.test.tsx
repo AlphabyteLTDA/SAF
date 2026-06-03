@@ -83,11 +83,15 @@ describe('Register Page (/register)', () => {
                     data: {
                         full_name: 'Ana Souza',
                     },
+                    emailRedirectTo: 'http://localhost:3000/login',
                 },
             })
 
-            expect(toast.success).toHaveBeenCalledWith(expect.stringMatching(/Conta criada/i))
-            expect(mockPush).toHaveBeenCalledWith('/')
+            expect(toast.success).toHaveBeenCalledWith(
+                expect.stringMatching(/Boas-vindas/i),
+                { duration: 5000 }
+            )
+            expect(screen.getByText(/Verifique seu E-mail/i)).toBeInTheDocument()
         })
     })
 

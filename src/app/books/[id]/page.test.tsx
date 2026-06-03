@@ -34,7 +34,7 @@ describe('Book Details Page (/books/[id]) - Borrowing Logic', () => {
     })
 
     const mockAvailableBook = {
-        id: 'book-1', title: 'Livro Teste', author: 'Autor Teste', category: 'Ficção', status: 'disponivel', cover_url: null
+        id: 'book-1', title: 'Livro Teste', author: 'Autor Teste', category: ['Ficção'], status: 'disponivel', cover_url: null
     }
 
     const setupMockForBookFetch = () => {
@@ -56,7 +56,17 @@ describe('Book Details Page (/books/[id]) - Borrowing Logic', () => {
 
         vi.mocked(supabase.from).mockImplementation((table: string) => {
             if (table === 'loans') {
-                return { insert: mockInsert } as any
+                return { 
+                    insert: mockInsert,
+                    select: vi.fn().mockReturnValue({
+                        eq: vi.fn().mockReturnValue({
+                            eq: vi.fn().mockReturnValue({
+                                maybeSingle: vi.fn().mockResolvedValue({ data: null, error: null })
+                            }),
+                            in: vi.fn().mockResolvedValue({ count: 0, error: null })
+                        })
+                    })
+                } as any
             }
             if (table === 'books') {
                 return {
@@ -99,7 +109,17 @@ describe('Book Details Page (/books/[id]) - Borrowing Logic', () => {
 
         vi.mocked(supabase.from).mockImplementation((table: string) => {
             if (table === 'loans') {
-                return { insert: mockInsert } as any
+                return { 
+                    insert: mockInsert,
+                    select: vi.fn().mockReturnValue({
+                        eq: vi.fn().mockReturnValue({
+                            eq: vi.fn().mockReturnValue({
+                                maybeSingle: vi.fn().mockResolvedValue({ data: null, error: null })
+                            }),
+                            in: vi.fn().mockResolvedValue({ count: 0, error: null })
+                        })
+                    })
+                } as any
             }
             if (table === 'books') {
                 return {
@@ -108,7 +128,7 @@ describe('Book Details Page (/books/[id]) - Borrowing Logic', () => {
                         eq: vi.fn().mockReturnValue({
                             single: vi.fn().mockResolvedValue({
                                 data: {
-                                    id: 'book-1', title: 'Livro Teste', author: 'Autor Teste', category: 'Ficção', status: 'disponivel', cover_url: null
+                                    id: 'book-1', title: 'Livro Teste', author: 'Autor Teste', category: ['Ficção'], status: 'disponivel', cover_url: null
                                 }, error: null
                             })
                         })
