@@ -25,15 +25,16 @@ export function useAuth() {
         initAuth()
 
         const { data: { subscription } } = supabase.auth.onAuthStateChange(
-            async (event, session) => {
+            (event, session) => {
                 if (mounted) {
                     setUser(session?.user || null)
                     setIsSessionLoading(false)
                 }
 
-                if (event === 'SIGNED_IN' && session?.user) {
+                // Cria perfil para novos usuários OAuth (Google, etc.) — fire-and-forget
+                if (event === 'SIGNED_IN' && session?.user?.app_metadata?.provider !== 'email') {
                     const u = session.user
-                    await supabase.from('profiles').upsert({
+                    supabase.from('profiles').upsert({
                         id: u.id,
                         full_name: u.user_metadata?.full_name ?? u.user_metadata?.name ?? u.email?.split('@')[0] ?? 'Usuário',
                         email: u.email ?? '',

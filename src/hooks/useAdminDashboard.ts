@@ -22,27 +22,18 @@ export function useAdminDashboard() {
     const { data: pendingRequests, isLoading: isLoadingPending, refetch: refetchPending } = useQuery({
         queryKey: ['admin-pending-requests'],
         queryFn: async (): Promise<AdminLoanWithDetails[]> => {
-            const { data: loans, error } = await supabase
-                .from('loans')
-                .select(`
-                    *,
-                    books (*)
-                `)
-                .eq('status', 'pendente')
-                .order('created_at', { ascending: true })
+            const [loansResult, profilesResult] = await Promise.all([
+                supabase.from('loans').select('*, books(*)').eq('status', 'pendente').order('created_at', { ascending: true }),
+                supabase.from('profiles').select('id, full_name, email')
+            ])
 
-            if (error) throw error
-            if (!loans || loans.length === 0) return []
+            if (loansResult.error) throw loansResult.error
+            if (!loansResult.data || loansResult.data.length === 0) return []
 
-            const userIds = Array.from(new Set(loans.map(l => l.user_id)))
-            const { data: profiles } = await supabase
-                .from('profiles')
-                .select('id, full_name, email')
-                .in('id', userIds)
-
-            return loans.map(loan => ({
+            const profiles = profilesResult.data ?? []
+            return loansResult.data.map(loan => ({
                 ...loan,
-                profiles: profiles?.find(p => p.id === loan.user_id) || { id: loan.user_id, full_name: 'Leitor(a)', email: '' }
+                profiles: profiles.find(p => p.id === loan.user_id) ?? { id: loan.user_id, full_name: 'Leitor(a)', email: '' }
             })) as AdminLoanWithDetails[]
         }
     })
@@ -51,27 +42,18 @@ export function useAdminDashboard() {
     const { data: activeLoans, isLoading: isLoadingActive, refetch: refetchActive } = useQuery({
         queryKey: ['admin-active-loans'],
         queryFn: async (): Promise<AdminLoanWithDetails[]> => {
-            const { data: loans, error } = await supabase
-                .from('loans')
-                .select(`
-                    *,
-                    books (*)
-                `)
-                .eq('status', 'ativo')
-                .order('due_date', { ascending: true })
+            const [loansResult, profilesResult] = await Promise.all([
+                supabase.from('loans').select('*, books(*)').eq('status', 'ativo').order('due_date', { ascending: true }),
+                supabase.from('profiles').select('id, full_name, email')
+            ])
 
-            if (error) throw error
-            if (!loans || loans.length === 0) return []
+            if (loansResult.error) throw loansResult.error
+            if (!loansResult.data || loansResult.data.length === 0) return []
 
-            const userIds = Array.from(new Set(loans.map(l => l.user_id)))
-            const { data: profiles } = await supabase
-                .from('profiles')
-                .select('id, full_name, email')
-                .in('id', userIds)
-
-            return loans.map(loan => ({
+            const profiles = profilesResult.data ?? []
+            return loansResult.data.map(loan => ({
                 ...loan,
-                profiles: profiles?.find(p => p.id === loan.user_id) || { id: loan.user_id, full_name: 'Leitor(a)', email: '' }
+                profiles: profiles.find(p => p.id === loan.user_id) ?? { id: loan.user_id, full_name: 'Leitor(a)', email: '' }
             })) as AdminLoanWithDetails[]
         }
     })

@@ -4,7 +4,6 @@ import { useState } from 'react'
 import { supabase } from '@/lib/supabase'
 import { useRouter } from 'next/navigation'
 import { Eye, EyeOff } from 'lucide-react'
-import Link from 'next/link'
 import Image from 'next/image'
 
 function GoogleIcon() {
@@ -66,7 +65,7 @@ export default function LoginPage() {
                 <h2 className="text-xl font-bold text-saf-800 mb-1 text-center tracking-tight">Biblioteca Missionária</h2>
                 <h1 className="text-2xl font-bold text-saf-900 mb-2 text-center">Entrar</h1>
                 <p className="text-saf-500 text-center text-sm mb-6 pb-2 border-b border-saf-50 w-full text-balance">
-                    Autentique-se para acessar o acervo da SAF.
+                    Entre com sua conta Google para acessar o acervo.
                 </p>
 
                 {error && (
@@ -134,14 +133,6 @@ export default function LoginPage() {
                             'Entrar'
                         )}
                     </button>
-                    <div className="mt-2 text-center">
-                        <Link
-                            href="/register"
-                            className="text-saf-500 hover:text-saf-600 font-medium text-sm flex items-center justify-center min-h-[44px]"
-                        >
-                            Ainda não tem conta? Cadastre-se aqui
-                        </Link>
-                    </div>
                 </form>
             </div>
             <div className="mt-4 mb-2 w-72 md:w-80 relative h-24 md:h-32 opacity-90 transition-opacity hover:opacity-100 flex items-center justify-center">
