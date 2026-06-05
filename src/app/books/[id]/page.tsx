@@ -17,6 +17,8 @@ export default function BookPage({ params }: { params: { id: string } }) {
     const [isClient, setIsClient] = useState(false)
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
     const [isCancelModalOpen, setIsCancelModalOpen] = useState(false)
+    const [isPixModalOpen, setIsPixModalOpen] = useState(false)
+    const [pixCopied, setPixCopied] = useState(false)
     const isAdmin = Boolean(role && String(role).toLowerCase().includes('admin'))
 
     useEffect(() => {
@@ -133,6 +135,7 @@ export default function BookPage({ params }: { params: { id: string } }) {
             queryClient.invalidateQueries({ queryKey: ['book-loan', params.id] })
             queryClient.invalidateQueries({ queryKey: ['my-loans'] })
             queryClient.invalidateQueries({ queryKey: ['my-loans-ids'] })
+            setIsPixModalOpen(true)
         },
         onError: (err: any) => {
             console.error('Erro na reserva:', err)
@@ -444,6 +447,12 @@ export default function BookPage({ params }: { params: { id: string } }) {
     }, [cancelOwnReservationMutation])
 
 
+    const handleCopyPix = () => {
+        navigator.clipboard.writeText('saf.ipvc@hotmail.com')
+        setPixCopied(true)
+        setTimeout(() => setPixCopied(false), 3000)
+    }
+
     if (!isClient || isLoading) {
         return (
             <div className="flex justify-center items-center py-20" data-testid="loading-spinner">
@@ -700,6 +709,91 @@ export default function BookPage({ params }: { params: { id: string } }) {
                                     Excluir Agora
                                 </button>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* PIX Payment Modal */}
+            {isPixModalOpen && (
+                <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-saf-900/70 backdrop-blur-sm animate-in fade-in duration-200">
+                    <div
+                        className="bg-white rounded-t-3xl sm:rounded-3xl w-full sm:max-w-sm overflow-hidden shadow-2xl border border-saf-100 animate-in slide-in-from-bottom-4 sm:zoom-in-95 duration-300"
+                        role="dialog"
+                        aria-modal="true"
+                    >
+                        {/* Header verde PIX */}
+                        <div className="bg-gradient-to-br from-[#32BCAD] to-[#1a9e90] px-6 pt-8 pb-6 flex flex-col items-center text-white">
+                            {/* Logo PIX estilizado */}
+                            <div className="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center mb-3 backdrop-blur-sm">
+                                <svg viewBox="0 0 32 32" className="w-8 h-8" fill="white">
+                                    <path d="M7.5 16L16 7.5L24.5 16L16 24.5L7.5 16Z" stroke="white" strokeWidth="1.5" fill="none"/>
+                                    <path d="M13 16L16 13L19 16L16 19L13 16Z" fill="white"/>
+                                </svg>
+                            </div>
+                            <h2 className="text-xl font-bold tracking-tight">Contribua com o Acervo</h2>
+                            <p className="text-white/80 text-sm text-center mt-1 leading-snug">
+                                Sua contribuição mantém a biblioteca funcionando.<br />Faça seu PIX para concluir a reserva.
+                            </p>
+                        </div>
+
+                        <div className="px-6 pt-5 pb-6 flex flex-col gap-4">
+                            {/* Livro reservado */}
+                            <div className="bg-saf-50 rounded-2xl px-4 py-3 flex items-center gap-3 border border-saf-100">
+                                <div className="w-9 h-9 bg-saf-100 rounded-xl flex items-center justify-center text-saf-500 shrink-0">
+                                    <BookOpen className="w-5 h-5" />
+                                </div>
+                                <div className="flex flex-col min-w-0">
+                                    <span className="text-xs text-saf-500 font-medium">Livro reservado</span>
+                                    <span className="text-saf-900 font-bold text-sm truncate">{book.title}</span>
+                                </div>
+                            </div>
+
+                            {/* Tipo de chave */}
+                            <div>
+                                <p className="text-xs font-semibold text-saf-500 uppercase tracking-wider mb-2">Chave PIX (E-mail)</p>
+                                <div className="flex items-center gap-2 bg-saf-50 border-2 border-saf-100 rounded-2xl px-4 py-3">
+                                    <span className="flex-1 text-saf-900 font-bold text-base select-all">
+                                        saf.ipvc@hotmail.com
+                                    </span>
+                                    <button
+                                        onClick={handleCopyPix}
+                                        className={`shrink-0 flex items-center gap-1.5 font-bold text-sm py-2 px-3 rounded-xl transition-all duration-200 ${
+                                            pixCopied
+                                                ? 'bg-emerald-500 text-white'
+                                                : 'bg-[#32BCAD] hover:bg-[#1a9e90] text-white'
+                                        }`}
+                                    >
+                                        {pixCopied ? (
+                                            <>
+                                                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                                                </svg>
+                                                Copiado!
+                                            </>
+                                        ) : (
+                                            <>
+                                                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                                                    <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" />
+                                                </svg>
+                                                Copiar
+                                            </>
+                                        )}
+                                    </button>
+                                </div>
+                            </div>
+
+                            <p className="text-xs text-saf-400 text-center leading-relaxed">
+                                Após o pagamento, apresente o comprovante na retirada do livro na igreja.
+                            </p>
+
+                            <button
+                                onClick={() => setIsPixModalOpen(false)}
+                                className="w-full bg-saf-900 hover:bg-saf-800 text-white font-bold py-4 rounded-2xl min-h-[52px] transition-colors text-base"
+                            >
+                                Já realizei o PIX
+                            </button>
                         </div>
                     </div>
                 </div>
