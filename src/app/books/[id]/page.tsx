@@ -714,85 +714,79 @@ export default function BookPage({ params }: { params: { id: string } }) {
                 </div>
             )}
 
-            {/* PIX Payment Modal */}
+            {/* PIX — faixa leve, não bloqueia a tela */}
             {isPixModalOpen && (
-                <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-saf-900/70 backdrop-blur-sm animate-in fade-in duration-200">
+                <div className="fixed bottom-20 sm:bottom-6 left-0 right-0 z-40 px-4 animate-in slide-in-from-bottom-3 duration-300 pointer-events-none">
                     <div
-                        className="bg-white rounded-t-3xl sm:rounded-3xl w-full sm:max-w-sm overflow-hidden shadow-2xl border border-saf-100 animate-in slide-in-from-bottom-4 sm:zoom-in-95 duration-300"
-                        role="dialog"
-                        aria-modal="true"
+                        className="bg-white rounded-3xl shadow-xl border border-saf-100 overflow-hidden max-w-md mx-auto pointer-events-auto"
+                        role="complementary"
+                        aria-label="Contribuição via PIX"
                     >
-                        {/* Header verde PIX */}
-                        <div className="bg-gradient-to-br from-[#32BCAD] to-[#1a9e90] px-6 pt-8 pb-6 flex flex-col items-center text-white">
-                            {/* Logo PIX estilizado */}
-                            <div className="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center mb-3 backdrop-blur-sm">
-                                <svg viewBox="0 0 32 32" className="w-8 h-8" fill="white">
-                                    <path d="M7.5 16L16 7.5L24.5 16L16 24.5L7.5 16Z" stroke="white" strokeWidth="1.5" fill="none"/>
-                                    <path d="M13 16L16 13L19 16L16 19L13 16Z" fill="white"/>
+                        {/* Header */}
+                        <div className="bg-[#32BCAD] px-5 py-3.5 flex items-center justify-between">
+                            <div className="flex items-center gap-2 text-white">
+                                <svg viewBox="0 0 24 24" className="w-5 h-5 shrink-0" fill="white">
+                                    <path d="M5.5 12L12 5.5L18.5 12L12 18.5L5.5 12Z" stroke="white" strokeWidth="1.2" fill="none"/>
+                                    <path d="M9.5 12L12 9.5L14.5 12L12 14.5L9.5 12Z" fill="white"/>
                                 </svg>
+                                <span className="font-bold text-sm">Contribuição via PIX</span>
                             </div>
-                            <h2 className="text-xl font-bold tracking-tight">Contribua com o Acervo</h2>
-                            <p className="text-white/80 text-sm text-center mt-1 leading-snug">
-                                Sua contribuição mantém a biblioteca funcionando.<br />Faça seu PIX para concluir a reserva.
-                            </p>
+                            <button
+                                onClick={() => setIsPixModalOpen(false)}
+                                className="text-white/80 hover:text-white p-1.5 rounded-lg hover:bg-white/20 transition-colors"
+                                aria-label="Fechar"
+                            >
+                                <X className="w-5 h-5" />
+                            </button>
                         </div>
 
-                        <div className="px-6 pt-5 pb-6 flex flex-col gap-4">
-                            {/* Livro reservado */}
-                            <div className="bg-saf-50 rounded-2xl px-4 py-3 flex items-center gap-3 border border-saf-100">
-                                <div className="w-9 h-9 bg-saf-100 rounded-xl flex items-center justify-center text-saf-500 shrink-0">
-                                    <BookOpen className="w-5 h-5" />
+                        <div className="px-5 py-4 flex flex-col gap-3">
+                            {/* Chave PIX */}
+                            <div className="flex items-center gap-2 bg-saf-50 border border-saf-100 rounded-2xl px-4 py-3">
+                                <div className="flex flex-col flex-1 min-w-0">
+                                    <span className="text-xs text-saf-500 font-medium mb-0.5">Chave PIX (e-mail)</span>
+                                    <span className="text-saf-900 font-bold text-base select-all truncate">saf.ipvc@hotmail.com</span>
                                 </div>
-                                <div className="flex flex-col min-w-0">
-                                    <span className="text-xs text-saf-500 font-medium">Livro reservado</span>
-                                    <span className="text-saf-900 font-bold text-sm truncate">{book.title}</span>
-                                </div>
+                                <button
+                                    onClick={handleCopyPix}
+                                    className={`shrink-0 flex items-center gap-1.5 font-bold text-sm py-2.5 px-4 rounded-xl transition-all duration-200 min-h-[44px] ${
+                                        pixCopied
+                                            ? 'bg-emerald-500 text-white'
+                                            : 'bg-[#32BCAD] hover:bg-[#1a9e90] active:bg-[#0f7a71] text-white'
+                                    }`}
+                                >
+                                    {pixCopied ? (
+                                        <>
+                                            <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                                            </svg>
+                                            Copiado!
+                                        </>
+                                    ) : (
+                                        <>
+                                            <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                                                <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" />
+                                            </svg>
+                                            Copiar
+                                        </>
+                                    )}
+                                </button>
                             </div>
 
-                            {/* Tipo de chave */}
-                            <div>
-                                <p className="text-xs font-semibold text-saf-500 uppercase tracking-wider mb-2">Chave PIX (E-mail)</p>
-                                <div className="flex items-center gap-2 bg-saf-50 border-2 border-saf-100 rounded-2xl px-4 py-3">
-                                    <span className="flex-1 text-saf-900 font-bold text-base select-all">
-                                        saf.ipvc@hotmail.com
-                                    </span>
-                                    <button
-                                        onClick={handleCopyPix}
-                                        className={`shrink-0 flex items-center gap-1.5 font-bold text-sm py-2 px-3 rounded-xl transition-all duration-200 ${
-                                            pixCopied
-                                                ? 'bg-emerald-500 text-white'
-                                                : 'bg-[#32BCAD] hover:bg-[#1a9e90] text-white'
-                                        }`}
-                                    >
-                                        {pixCopied ? (
-                                            <>
-                                                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                                                </svg>
-                                                Copiado!
-                                            </>
-                                        ) : (
-                                            <>
-                                                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
-                                                    <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" />
-                                                </svg>
-                                                Copiar
-                                            </>
-                                        )}
-                                    </button>
-                                </div>
+                            {/* Aviso dos R$ 0,01 */}
+                            <div className="bg-amber-50 border border-amber-200 rounded-2xl px-4 py-3 flex items-start gap-2.5">
+                                <span className="text-lg leading-none mt-0.5">💡</span>
+                                <p className="text-amber-900 text-sm font-medium leading-snug">
+                                    <strong>Dica importante:</strong> todo PIX deve incluir <strong>R$ 0,01</strong> (um centavo) junto com o valor — esse centavo identifica que o pagamento é para a Biblioteca.
+                                </p>
                             </div>
-
-                            <p className="text-xs text-saf-400 text-center leading-relaxed">
-                                Após o pagamento, apresente o comprovante na retirada do livro na igreja.
-                            </p>
 
                             <button
                                 onClick={() => setIsPixModalOpen(false)}
-                                className="w-full bg-saf-900 hover:bg-saf-800 text-white font-bold py-4 rounded-2xl min-h-[52px] transition-colors text-base"
+                                className="w-full bg-saf-100 hover:bg-saf-200 text-saf-700 font-bold py-3 rounded-2xl min-h-[44px] transition-colors text-sm"
                             >
-                                Já realizei o PIX
+                                Fechar
                             </button>
                         </div>
                     </div>
